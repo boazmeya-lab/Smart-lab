@@ -3,120 +3,173 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Lab — QR Studio</title>
+  <title>Smart Lab — QR Generator</title>
   <link rel="stylesheet" href="style.css">
   <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
 </head>
 <body>
 
-  <header>
-    <div class="logo">✦ Smart Lab <span>QR Studio</span></div>
-    <div class="lang-switch">
-      <button class="active">FR</button>
-      <button>EN</button>
+  <header class="navbar">
+    <div class="logo">
+      <span class="logo-icon">🟩</span> Smart Lab <span>QR Generator</span>
     </div>
   </header>
 
-  <main class="container">
-    <h1>Smart Lab.<br><span>QR codes, beautifully.</span></h1>
-    <p class="subtitle">Générateur de QR codes gratuit — modèles beaux et personnalisables</p>
-
-    <!-- 1. CHOISIR LE TYPE -->
-    <section class="step">
-      <h2>1. CHOISIS LE TYPE</h2>
-      <div class="grid-types">
-        <button class="type-btn active" data-type="url">🔗 Lien</button>
-        <button class="type-btn" data-type="wifi">📶 Wi-Fi</button>
-        <button class="type-btn" data-type="sms">💬 SMS</button>
-        <button class="type-btn" data-type="text">📝 Texte</button>
+  <!-- Stepper de progression -->
+  <div class="stepper-bar">
+    <div class="stepper">
+      <div class="step-item active" id="step-nav-1">
+        <span class="step-num">1</span>
+        <span class="step-text">Sélectionnez le type de QR</span>
       </div>
-    </section>
-
-    <!-- 2. FORMULAIRE DYNAMIQUE -->
-    <section class="step">
-      <h2>2. REMPLIS LES INFOS</h2>
-      <div id="form-container">
-        <!-- Généré dynamiquement selon le type choisi -->
+      <div class="step-line"></div>
+      <div class="step-item" id="step-nav-2">
+        <span class="step-num">2</span>
+        <span class="step-text">Ajouter du contenu</span>
       </div>
-    </section>
-
-    <!-- 3. BIBLIOTHÈQUE DE MODÈLES -->
-    <section class="step">
-      <h2>3. CHOISIS UN MODÈLE</h2>
-      <div class="models-grid">
-        <!-- Gratuits -->
-        <div class="model-card active" data-preset="classic">
-          <div class="model-preview">Classic</div>
-          <div class="model-info"><span>Classic</span><span class="badge free">Gratuit</span></div>
-        </div>
-        <div class="model-card" data-preset="rounded">
-          <div class="model-preview">Rounded</div>
-          <div class="model-info"><span>Rounded</span><span class="badge free">Gratuit</span></div>
-        </div>
-        <div class="model-card" data-preset="dots">
-          <div class="model-preview">Dots</div>
-          <div class="model-info"><span>Dots</span><span class="badge free">Gratuit</span></div>
-        </div>
-        <div class="model-card" data-preset="ocean">
-          <div class="model-preview">Ocean</div>
-          <div class="model-info"><span>Ocean</span><span class="badge free">Gratuit</span></div>
-        </div>
-
-        <!-- Premium Payants ($0.99) -->
-        <div class="model-card" data-preset="sunset" data-paid="true">
-          <div class="model-preview sunset-bg">Sunset</div>
-          <div class="model-info"><span>Sunset</span><span class="badge paid">🔒 $0.99</span></div>
-        </div>
-        <div class="model-card" data-preset="neon" data-paid="true">
-          <div class="model-preview neon-bg">Neon Lab</div>
-          <div class="model-info"><span>Neon Lab</span><span class="badge paid">🔒 $0.99</span></div>
-        </div>
-        <div class="model-card" data-preset="glass" data-paid="true">
-          <div class="model-preview glass-bg">Glass</div>
-          <div class="model-info"><span>Glass</span><span class="badge paid">🔒 $0.99</span></div>
-        </div>
-        <div class="model-card" data-preset="signature" data-paid="true">
-          <div class="model-preview signature-bg">Signature</div>
-          <div class="model-info"><span>Signature</span><span class="badge paid">🔒 $0.99</span></div>
-        </div>
+      <div class="step-line"></div>
+      <div class="step-item" id="step-nav-3">
+        <span class="step-num">3</span>
+        <span class="step-text">Concevoir un code QR</span>
       </div>
-    </section>
-
-    <!-- APERÇU ET TÉLÉCHARGEMENT -->
-    <section class="step preview-section">
-      <div id="canvas-container"></div>
-      <button id="btn-download-trigger" class="btn-primary">Télécharger le QR Code</button>
-    </section>
-  </main>
-
-  <!-- POP-UP MODAL PUB / PAIEMENT -->
-  <div id="modal-download" class="modal hidden">
-    <div class="modal-content">
-      <button class="close-modal">&times;</button>
-      <h3>Télécharger votre QR Code</h3>
-      <p id="modal-desc">Choisissez une option pour débloquer votre téléchagement :</p>
-
-      <div class="modal-options">
-        <div class="option-card" id="option-free">
-          <h4>Option 1 : Gratuit</h4>
-          <p>Regardez une pub vidéo de 30s</p>
-          <div class="video-placeholder">
-            <p id="video-timer">▶ Lancer la vidéo (30s)</p>
-          </div>
-          <button id="btn-free-download" class="btn-secondary" disabled>Télécharger (Gratuit)</button>
-        </div>
-
-        <div class="divider" id="modal-divider">OU</div>
-
-        <div class="option-card premium">
-          <h4>Option 2 : Instantané / Premium</h4>
-          <p>Téléchargement immédiat HD</p>
-          <div class="price">$0.99</div>
-          <button id="btn-pay-download" class="btn-primary">Payer 0,99 $ & Télécharger</button>
-        </div>
+      <div class="step-line"></div>
+      <div class="step-item" id="step-nav-4">
+        <span class="step-num">4</span>
+        <span class="step-text">Télécharger le code QR</span>
       </div>
     </div>
   </div>
+
+  <main class="main-container">
+
+    <!-- ÉTAPE 1 : CHOIX DU TYPE -->
+    <section id="step-1" class="wizard-step active">
+      <h1>1. Sélectionnez un type de code QR</h1>
+      <div class="cards-grid">
+        <div class="qr-card active" data-type="url">
+          <div class="card-icon">🌐</div>
+          <h3>Site web</h3>
+          <p>Lien vers n'importe quelle URL de site web</p>
+        </div>
+        <div class="qr-card" data-type="pdf">
+          <div class="card-icon">📄</div>
+          <h3>PDF</h3>
+          <p>Afficher un document PDF</p>
+        </div>
+        <div class="qr-card" data-type="vcard">
+          <div class="card-icon">🪪</div>
+          <h3>vCard</h3>
+          <p>Partagez une carte de visite numérique</p>
+        </div>
+        <div class="qr-card" data-type="wifi">
+          <div class="card-icon">📶</div>
+          <h3>Wi-Fi</h3>
+          <p>Se connecter à un réseau Wi-Fi</p>
+        </div>
+        <div class="qr-card" data-type="images">
+          <div class="card-icon">🖼️</div>
+          <h3>Images</h3>
+          <p>Partager plusieurs images</p>
+        </div>
+        <div class="qr-card" data-type="whatsapp">
+          <div class="card-icon">💬</div>
+          <h3>WhatsApp</h3>
+          <p>Recevoir des messages WhatsApp</p>
+        </div>
+        <div class="qr-card" data-type="mp3">
+          <div class="card-icon">🎵</div>
+          <h3>MP3</h3>
+          <p>Partager un fichier audio</p>
+        </div>
+        <div class="qr-card" data-type="social">
+          <div class="card-icon">📱</div>
+          <h3>Réseaux sociaux</h3>
+          <p>Partagez vos réseaux sociaux</p>
+        </div>
+      </div>
+      
+      <div class="footer-actions right">
+        <button id="btn-to-step-2" class="btn-green">Suivant ➔</button>
+      </div>
+    </section>
+
+    <!-- ÉTAPE 2 : CONTENU -->
+    <section id="step-2" class="wizard-step">
+      <h1>2. Ajoutez du contenu à votre code QR</h1>
+      <div class="form-card">
+        <div id="dynamic-form">
+          <!-- Injecté dynamiquement -->
+        </div>
+      </div>
+
+      <div class="footer-actions space-between">
+        <button id="btn-back-1" class="btn-outline">← Dos</button>
+        <button id="btn-to-step-3" class="btn-green">Sauvegarder ➔</button>
+      </div>
+    </section>
+
+    <!-- ÉTAPE 3 : CONCEVOIR LE CODE QR -->
+    <section id="step-3" class="wizard-step">
+      <h1>3. Concevoir le QR</h1>
+      <div class="design-layout">
+        <div class="design-options">
+          <div class="accordion-item">
+            <label>Couleur du QR Code</label>
+            <input type="color" id="qr-color-picker" value="#00b050">
+          </div>
+          <div class="accordion-item">
+            <label>Motif / Modèle des points</label>
+            <select id="qr-pattern-select">
+              <option value="square">Carré classique</option>
+              <option value="dots">Points arrondis</option>
+              <option value="rounded">Coins doux</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="live-preview-box">
+          <div id="canvas-container"></div>
+        </div>
+      </div>
+
+      <div class="footer-actions space-between">
+        <button id="btn-back-2" class="btn-outline">← Dos</button>
+        <button id="btn-to-step-4" class="btn-green">Aperçu & Créer ➔</button>
+      </div>
+    </section>
+
+    <!-- ÉTAPE 4 : TÉLÉCHARGEMENT & PUB/PAYANT -->
+    <section id="step-4" class="wizard-step">
+      <h1>4. Télécharger le code QR</h1>
+      
+      <div class="download-box">
+        <div id="final-canvas-container"></div>
+        
+        <div class="download-options">
+          <div class="opt-card">
+            <h3>Option Gratuit</h3>
+            <p>Visionnez une courte pub de 30s</p>
+            <div id="video-box" class="video-placeholder">
+              <span id="timer-text">▶ Lancer la pub (30s)</span>
+            </div>
+            <button id="btn-free-dl" class="btn-outline" disabled>Télécharger PNG</button>
+          </div>
+
+          <div class="opt-card premium">
+            <h3>Option Téléchargement Instantané</h3>
+            <p>Sans attente + Haute résolution SVG</p>
+            <div class="price">$0.99</div>
+            <button id="btn-pay-dl" class="btn-green">Payer 0,99 $ & Télécharger</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-actions">
+        <button id="btn-back-3" class="btn-outline">← Modifier</button>
+      </div>
+    </section>
+
+  </main>
 
   <script src="script.js"></script>
 </body>
