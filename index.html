@@ -1,1 +1,104 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Lab — Générateur de QR Code</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Librairie QR Code Styling via CDN -->
+  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+</head>
+<body>
 
+  <header>
+    <div class="logo">✦ Smart Lab <span>QR Studio</span></div>
+    <div class="lang-switch">
+      <button class="active">FR</button>
+      <button>EN</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <h1>Smart Lab.<br><span>QR codes, beautifully.</span></h1>
+    <p class="subtitle">Générateur de QR codes gratuit — modèles beaux et personnalisables</p>
+
+    <!-- 1. Choix du type -->
+    <section class="step">
+      <h2>1. CHOISIS LE TYPE</h2>
+      <div class="grid-types">
+        <button class="type-btn active" data-type="url">🔗 Lien</button>
+        <button class="type-btn" data-type="wifi">📶 Wi-Fi</button>
+        <button class="type-btn" data-type="sms">💬 SMS</button>
+        <button class="type-btn" data-type="text">📝 Texte</button>
+      </div>
+    </section>
+
+    <!-- 2. Formulaire dynamique -->
+    <section class="step">
+      <h2>2. REMPLIS LES INFOS</h2>
+      <div id="form-container">
+        <div class="input-group" id="input-url">
+          <label>URL du site</label>
+          <input type="url" id="qr-data" placeholder="https://votre-site.com">
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Styles & Prévisualisation -->
+    <section class="step">
+      <h2>3. STYLE ET APERÇU</h2>
+      <div class="preview-layout">
+        <div class="controls">
+          <label>Couleur du QR Code</label>
+          <input type="color" id="qr-color" value="#000000">
+          
+          <label>Style des points</label>
+          <select id="qr-dots-style">
+            <option value="square">Carré (Classic)</option>
+            <option value="dots">Points (Dots)</option>
+            <option value="rounded">Arrondi (Rounded)</option>
+          </select>
+        </div>
+
+        <div class="qr-preview-box">
+          <div id="canvas-container"></div>
+          <button id="btn-download-trigger" class="btn-primary">Télécharger le QR Code</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Pop-up Modal Pub / Paiement -->
+  <div id="modal-download" class="modal hidden">
+    <div class="modal-content">
+      <button class="close-modal">&times;</button>
+      <h3>Télécharger votre QR Code</h3>
+      <p>Choisissez une option pour débloquer votre téléchargement HD :</p>
+
+      <div class="modal-options">
+        <!-- Option Gratuite (Vidéo) -->
+        <div class="option-card">
+          <h4>Option 1 : Gratuit</h4>
+          <p>Regardez une courte vidéo de 30s</p>
+          <div class="video-placeholder">
+            <p id="video-timer">▶ Lancer la vidéo (30s)</p>
+          </div>
+          <button id="btn-free-download" class="btn-secondary" disabled>Télécharger (Gratuit)</button>
+        </div>
+
+        <div class="divider">OU</div>
+
+        <!-- Option Payante -->
+        <div class="option-card premium">
+          <h4>Option 2 : Instantané</h4>
+          <p>Téléchargement immédiat sans attente</p>
+          <div class="price">$0.99</div>
+          <button id="btn-pay-download" class="btn-primary">Payer 0,99 $ & Télécharger</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
