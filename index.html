@@ -3,174 +3,147 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Lab — QR Generator</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Générateur de QR Code Stylé</title>
+  
+  <!-- 1. Chargement de la bibliothèque via CDN -->
   <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f5f5f5;
+      text-align: center;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    input {
+      width: 90%;
+      padding: 10px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    .btn-group {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      padding: 8px 16px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      background: #fff;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #eee;
+    }
+    #canvas {
+      display: flex;
+      justify-content: center;
+      margin: 20px 0;
+    }
+    .download-btn {
+      background: #000;
+      color: #fff;
+      padding: 10px 20px;
+    }
+  </style>
 </head>
 <body>
 
-  <header class="navbar">
-    <div class="logo">
-      <span class="logo-icon">🟩</span> Smart Lab <span>QR Generator</span>
-    </div>
-  </header>
+  <div class="container">
+    <h2>Générateur de QR Code</h2>
+    
+    <!-- Champ de saisie -->
+    <input type="text" id="qr-input" value="https://google.com" placeholder="Entre ton lien ici">
 
-  <!-- Stepper de progression -->
-  <div class="stepper-bar">
-    <div class="stepper">
-      <div class="step-item active" id="step-nav-1">
-        <span class="step-num">1</span>
-        <span class="step-text">Sélectionnez le type de QR</span>
-      </div>
-      <div class="step-line"></div>
-      <div class="step-item" id="step-nav-2">
-        <span class="step-num">2</span>
-        <span class="step-text">Ajouter du contenu</span>
-      </div>
-      <div class="step-line"></div>
-      <div class="step-item" id="step-nav-3">
-        <span class="step-num">3</span>
-        <span class="step-text">Concevoir un code QR</span>
-      </div>
-      <div class="step-line"></div>
-      <div class="step-item" id="step-nav-4">
-        <span class="step-num">4</span>
-        <span class="step-text">Télécharger le code QR</span>
-      </div>
+    <!-- Boutons pour changer de style (Presets) -->
+    <div class="btn-group">
+      <button onclick="applyPreset('youtube')">YouTube</button>
+      <button onclick="applyPreset('telegram')">Telegram</button>
+      <button onclick="applyPreset('wifi')">Wi-Fi</button>
     </div>
+
+    <!-- Emplacement où le QR code va s'afficher -->
+    <div id="canvas"></div>
+
+    <!-- Bouton de téléchargement -->
+    <button class="download-btn" onclick="downloadQR()">Télécharger le PNG</button>
   </div>
 
-  <main class="main-container">
+  <script>
+    // 2. Définition des modèles (Presets)
+    const presets = {
+      youtube: {
+        dotsOptions: { color: "#FF0000", type: "rounded" },
+        cornersSquareOptions: { color: "#CC0000", type: "extra-rounded" },
+        cornersDotOptions: { color: "#FF0000", type: "dot" },
+        image: "https://upload.wikimedia.org/wikipedia/commons/ef/ef0/YouTube_logo_%282017%29.svg"
+      },
+      telegram: {
+        dotsOptions: { color: "#0088cc", type: "dots" },
+        cornersSquareOptions: { color: "#0088cc", type: "extra-rounded" },
+        cornersDotOptions: { color: "#0088cc", type: "dot" },
+        image: "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
+      },
+      wifi: {
+        dotsOptions: { color: "#4A90E2", type: "classy-rounded" },
+        cornersSquareOptions: { color: "#1B4F72", type: "extra-rounded" },
+        cornersDotOptions: { color: "#1B4F72", type: "dot" },
+        image: "https://cdn-icons-png.flaticon.com/512/93/93158.png"
+      }
+    };
 
-    <!-- ÉTAPE 1 : CHOIX DU TYPE -->
-    <section id="step-1" class="wizard-step active">
-      <h1>1. Sélectionnez un type de code QR</h1>
-      <div class="cards-grid">
-        <div class="qr-card active" data-type="url">
-          <div class="card-icon">🌐</div>
-          <h3>Site web</h3>
-          <p>Lien vers n'importe quelle URL de site web</p>
-        </div>
-        <div class="qr-card" data-type="pdf">
-          <div class="card-icon">📄</div>
-          <h3>PDF</h3>
-          <p>Afficher un document PDF</p>
-        </div>
-        <div class="qr-card" data-type="vcard">
-          <div class="card-icon">🪪</div>
-          <h3>vCard</h3>
-          <p>Partagez une carte de visite numérique</p>
-        </div>
-        <div class="qr-card" data-type="wifi">
-          <div class="card-icon">📶</div>
-          <h3>Wi-Fi</h3>
-          <p>Se connecter à un réseau Wi-Fi</p>
-        </div>
-        <div class="qr-card" data-type="images">
-          <div class="card-icon">🖼️</div>
-          <h3>Images</h3>
-          <p>Partager plusieurs images</p>
-        </div>
-        <div class="qr-card" data-type="whatsapp">
-          <div class="card-icon">💬</div>
-          <h3>WhatsApp</h3>
-          <p>Recevoir des messages WhatsApp</p>
-        </div>
-        <div class="qr-card" data-type="mp3">
-          <div class="card-icon">🎵</div>
-          <h3>MP3</h3>
-          <p>Partager un fichier audio</p>
-        </div>
-        <div class="qr-card" data-type="social">
-          <div class="card-icon">📱</div>
-          <h3>Réseaux sociaux</h3>
-          <p>Partagez vos réseaux sociaux</p>
-        </div>
-      </div>
-      
-      <div class="footer-actions right">
-        <button id="btn-to-step-2" class="btn-green">Suivant ➔</button>
-      </div>
-    </section>
+    // 3. Initialisation du QR Code
+    const qrCode = new QRCodeStyling({
+      width: 250,
+      height: 250,
+      data: document.getElementById("qr-input").value,
+      imageOptions: { margin: 6, hideBackgroundDots: true },
+      qrOptions: { errorCorrectionLevel: 'H' } // Essentiel pour scanner facilement avec un logo
+    });
 
-    <!-- ÉTAPE 2 : CONTENU -->
-    <section id="step-2" class="wizard-step">
-      <h1>2. Ajoutez du contenu à votre code QR</h1>
-      <div class="form-card">
-        <div id="dynamic-form">
-          <!-- Injecté dynamiquement -->
-        </div>
-      </div>
+    // Affichage dans le div #canvas
+    qrCode.append(document.getElementById("canvas"));
 
-      <div class="footer-actions space-between">
-        <button id="btn-back-1" class="btn-outline">← Dos</button>
-        <button id="btn-to-step-3" class="btn-green">Sauvegarder ➔</button>
-      </div>
-    </section>
+    // 4. Fonction pour changer de modèle
+    function applyPreset(name) {
+      const config = presets[name];
+      const textValue = document.getElementById("qr-input").value;
 
-    <!-- ÉTAPE 3 : CONCEVOIR LE CODE QR -->
-    <section id="step-3" class="wizard-step">
-      <h1>3. Concevoir le QR</h1>
-      <div class="design-layout">
-        <div class="design-options">
-          <div class="accordion-item">
-            <label>Couleur du QR Code</label>
-            <input type="color" id="qr-color-picker" value="#00b050">
-          </div>
-          <div class="accordion-item">
-            <label>Motif / Modèle des points</label>
-            <select id="qr-pattern-select">
-              <option value="square">Carré classique</option>
-              <option value="dots">Points arrondis</option>
-              <option value="rounded">Coins doux</option>
-            </select>
-          </div>
-        </div>
+      qrCode.update({
+        data: textValue,
+        image: config.image,
+        dotsOptions: config.dotsOptions,
+        cornersSquareOptions: config.cornersSquareOptions,
+        cornersDotOptions: config.cornersDotOptions
+      });
+    }
 
-        <div class="live-preview-box">
-          <div id="canvas-container"></div>
-        </div>
-      </div>
+    // Mettre à jour le QR Code automatiquement quand on tape du texte
+    document.getElementById("qr-input").addEventListener("input", (e) => {
+      qrCode.update({ data: e.target.value });
+    });
 
-      <div class="footer-actions space-between">
-        <button id="btn-back-2" class="btn-outline">← Dos</button>
-        <button id="btn-to-step-4" class="btn-green">Aperçu & Créer ➔</button>
-      </div>
-    </section>
+    // 5. Fonction pour télécharger la photo
+    function downloadQR() {
+      qrCode.download({ name: "qr-code", extension: "png" });
+    }
 
-    <!-- ÉTAPE 4 : TÉLÉCHARGEMENT & PUB/PAYANT -->
-    <section id="step-4" class="wizard-step">
-      <h1>4. Télécharger le code QR</h1>
-      
-      <div class="download-box">
-        <div id="final-canvas-container"></div>
-        
-        <div class="download-options">
-          <div class="opt-card">
-            <h3>Option Gratuit</h3>
-            <p>Visionnez une courte pub de 30s</p>
-            <div id="video-box" class="video-placeholder">
-              <span id="timer-text">▶ Lancer la pub (30s)</span>
-            </div>
-            <button id="btn-free-dl" class="btn-outline" disabled>Télécharger PNG</button>
-          </div>
+    // Appliquer le style YouTube par défaut au chargement
+    applyPreset('youtube');
+  </script>
 
-          <div class="opt-card premium">
-            <h3>Option Téléchargement Instantané</h3>
-            <p>Sans attente + Haute résolution SVG</p>
-            <div class="price">$0.99</div>
-            <button id="btn-pay-dl" class="btn-green">Payer 0,99 $ & Télécharger</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-actions">
-        <button id="btn-back-3" class="btn-outline">← Modifier</button>
-      </div>
-    </section>
-
-  </main>
-
-  <script src="script.js"></script>
 </body>
 </html>
