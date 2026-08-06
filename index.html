@@ -12,124 +12,6 @@
     <!-- Header Leboncoin-like -->
     <header class="app-header">
         <div class="header-top">
-            <i class="fa-solid fa-bars menu-btn"></i>
-            <div class="logo-container">
-                <span class="logo-text">smart<span>shop</span></span>
-            </div>
-            <div class="city-selector">
-                <i class="fa-solid fa-location-dot"></i>
-                <select id="city-select">
-                    <option value="kinshasa">Kinshasa</option>
-                    <option value="lubumbashi">Lubumbashi</option>
-                    <option value="goma">Goma</option>
-                    <option value="all">Toute la RDC</option>
-                </select>
-            </div>
-        </div>
-
-        <!-- Barre de recherche avec caméra -->
-        <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" placeholder="Rechercher sur smartshop">
-            <label for="image-upload" class="camera-btn" title="Recherche par photo">
-                <i class="fa-solid fa-camera"></i>
-                <input type="file" id="image-upload" accept="image/*" capture="environment" hidden>
-            </label>
-        </div>
-    </header>
-
-    <main class="container">
-        
-        <!-- Section Tendance (Scroll horizontal) -->
-        <section class="section-block">
-            <h2 class="block-title">Tendance en ce moment</h2>
-            <div class="horizontal-scroll">
-                <div class="trend-card" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300');">
-                    <span>iPhones Vérifiés</span>
-                </div>
-                <div class="trend-card" style="background-image: url('https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300');">
-                    <span>Samsung Galaxy</span>
-                </div>
-                <div class="trend-card" style="background-image: url('https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300');">
-                    <span>Montres Smart</span>
-                </div>
-            </div>
-        </section>
-
-        <!-- Block Categorie : Téléphones & Smart (Scroll horizontal style Leboncoin) -->
-        <section class="section-block">
-            <div class="block-header">
-                <h2 class="block-title">Téléphones & Smartphones</h2>
-                <i class="fa-solid fa-chevron-right"></i>
-            </div>
-
-            <div class="horizontal-scroll products-scroll">
-                
-                <!-- Annonce 1 -->
-                <article class="lbc-card">
-                    <div class="seller-header">
-                        <div class="seller-avatar">S</div>
-                        <span class="seller-name">Sébastien</span>
-                        <span class="seller-score"><i class="fa-solid fa-star"></i> 5 <span class="count">(99)</span></span>
-                    </div>
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" alt="iPhone 12">
-                        <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                    <div class="card-details">
-                        <h3 class="card-title">iPhone 12 Pro 128Go</h3>
-                        <p class="card-price">380 $</p>
-                        <p class="card-delivery"><i class="fa-solid fa-truck"></i> Livraison possible</p>
-                        <p class="card-meta">Kinshasa (Gombe) • aujourd'hui à 01:08</p>
-                    </div>
-                </article>
-
-                <!-- Annonce 2 -->
-                <article class="lbc-card">
-                    <div class="seller-header">
-                        <div class="seller-avatar orange">A</div>
-                        <span class="seller-name">Anakin S.</span>
-                        <span class="seller-score"><i class="fa-solid fa-star"></i> 5 <span class="count">(12)</span></span>
-                    </div>
-                    <div class="card-image">
-                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" alt="Samsung S21">
-                        <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
-                    </div>
-                    <div class="card-details">
-                        <h3 class="card-title">Samsung S21 Ultra 256Go</h3>
-                        <p class="card-price">420 $</p>
-                        <p class="card-delivery"><i class="fa-solid fa-truck"></i> Livraison possible</p>
-                        <p class="card-meta">Lubumbashi • aujourd'hui à 00:15</p>
-                    </div>
-                </article>
-
-            </div>
-        </section>
-
-    </main>
-
-    <!-- Bottom Nav -->
-    <nav class="bottom-nav">
-        <a href="#" class="nav-item active"><i class="fa-solid fa-house"></i><span>Accueil</span></a>
-        <a href="#" class="nav-item"><i class="fa-regular fa-heart"></i><span>Favoris</span></a>
-        <a href="#" class="nav-item add-btn"><i class="fa-solid fa-plus"></i><span>Déposer</span></a>
-        <a href="#" class="nav-item"><i class="fa-regular fa-comment"></i><span>Messages</span></a>
-        <a href="#" class="nav-item"><i class="fa-regular fa-user"></i><span>Compte</span></a>
-    </nav>
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SmartShop RDC - Petites annonces RDC</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body>
-
-    <!-- Header Leboncoin-like -->
-    <header class="app-header">
-        <div class="header-top">
             <i class="fa-solid fa-bars menu-btn" id="btn-menu"></i>
             <div class="logo-container">
                 <span class="logo-text">smart<span>shop</span></span>
@@ -137,10 +19,10 @@
             <div class="city-selector">
                 <i class="fa-solid fa-location-dot"></i>
                 <select id="city-select">
+                    <option value="Toute la RDC">Toute la RDC</option>
                     <option value="Kinshasa">Kinshasa</option>
                     <option value="Lubumbashi">Lubumbashi</option>
                     <option value="Goma">Goma</option>
-                    <option value="Toute la RDC">Toute la RDC</option>
                 </select>
             </div>
         </div>
@@ -179,7 +61,7 @@
             <!-- Annonces -->
             <div class="section-block">
                 <div class="block-header">
-                    <h2 class="block-title">Annonces à <span id="display-city">Kinshasa</span></h2>
+                    <h2 class="block-title">Annonces à <span id="display-city">Toute la RDC</span></h2>
                     <i class="fa-solid fa-chevron-right"></i>
                 </div>
 
@@ -227,38 +109,44 @@
 
         <!-- SECTION 2 : FAVORIS -->
         <section id="section-favoris" class="app-section hidden">
-            <h2 class="block-title">Mes Favoris</h2>
-            <div id="favoris-list" class="horizontal-scroll">
-                <p class="empty-msg">Aucun article dans vos favoris pour le moment.</p>
+            <div class="section-block">
+                <h2 class="block-title">Mes Favoris</h2>
+                <div id="favoris-list" class="horizontal-scroll">
+                    <p class="empty-msg">Aucun article dans vos favoris pour le moment.</p>
+                </div>
             </div>
         </section>
 
         <!-- SECTION 3 : DÉPOSER UNE ANNONCE -->
         <section id="section-deposer" class="app-section hidden">
-            <h2 class="block-title">Déposer une annonce</h2>
-            <form id="form-annonce" class="form-container">
-                <input type="text" placeholder="Titre de l'annonce" required>
-                <input type="number" placeholder="Prix en USD ($)" required>
-                <select required>
-                    <option value="">Sélectionner une ville</option>
-                    <option value="Kinshasa">Kinshasa</option>
-                    <option value="Lubumbashi">Lubumbashi</option>
-                    <option value="Goma">Goma</option>
-                </select>
-                <textarea placeholder="Description de l'article..."></textarea>
-                <button type="submit" class="btn-submit">Publier l'annonce</button>
-            </form>
+            <div class="section-block">
+                <h2 class="block-title">Déposer une annonce</h2>
+                <form id="form-annonce" class="form-container">
+                    <input type="text" placeholder="Titre de l'annonce" required>
+                    <input type="number" placeholder="Prix en USD ($)" required>
+                    <select required>
+                        <option value="">Sélectionner une ville</option>
+                        <option value="Kinshasa">Kinshasa</option>
+                        <option value="Lubumbashi">Lubumbashi</option>
+                        <option value="Goma">Goma</option>
+                    </select>
+                    <textarea placeholder="Description de l'article..."></textarea>
+                    <button type="submit" class="btn-submit">Publier l'annonce</button>
+                </form>
+            </div>
         </section>
 
         <!-- SECTION 4 : MESSAGES -->
         <section id="section-messages" class="app-section hidden">
-            <h2 class="block-title">Messages & Chats</h2>
-            <div class="chat-list">
-                <div class="chat-item">
-                    <div class="chat-avatar">S</div>
-                    <div class="chat-info">
-                        <h4>Sébastien (iPhone 12 Pro)</h4>
-                        <p>Bonjour, le téléphone est toujours disponible à Gombe ?</p>
+            <div class="section-block">
+                <h2 class="block-title">Messages & Chats</h2>
+                <div class="chat-list">
+                    <div class="chat-item">
+                        <div class="chat-avatar">S</div>
+                        <div class="chat-info">
+                            <h4>Sébastien (iPhone 12 Pro)</h4>
+                            <p>Bonjour, le téléphone est toujours disponible à Gombe ?</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -266,19 +154,21 @@
 
         <!-- SECTION 5 : COMPTE -->
         <section id="section-compte" class="app-section hidden">
-            <h2 class="block-title">Mon Compte</h2>
-            <div class="account-card">
-                <div class="account-header">
-                    <div class="account-avatar"><i class="fa-solid fa-user"></i></div>
-                    <div>
-                        <h3>Utilisateur SmartShop</h3>
-                        <p>+243 81 000 0000</p>
+            <div class="section-block">
+                <h2 class="block-title">Mon Compte</h2>
+                <div class="account-card">
+                    <div class="account-header">
+                        <div class="account-avatar"><i class="fa-solid fa-user"></i></div>
+                        <div>
+                            <h3>Utilisateur SmartShop</h3>
+                            <p>+243 81 000 0000</p>
+                        </div>
                     </div>
-                </div>
-                <div class="account-menu">
-                    <button class="account-link"><i class="fa-solid fa-box"></i> Mes annonces en ligne</button>
-                    <button class="account-link"><i class="fa-solid fa-wallet"></i> Solde & Portefeuille Mobile Money</button>
-                    <button class="account-link"><i class="fa-solid fa-gear"></i> Paramètres du compte</button>
+                    <div class="account-menu">
+                        <button class="account-link"><i class="fa-solid fa-box"></i> Mes annonces en ligne</button>
+                        <button class="account-link"><i class="fa-solid fa-wallet"></i> Solde & Portefeuille Mobile Money</button>
+                        <button class="account-link"><i class="fa-solid fa-gear"></i> Paramètres du compte</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -309,11 +199,7 @@
         </a>
     </nav>
 
-    <!-- Script JavaScript -->
     <script src="script.js"></script>
 </body>
     </html>
-    
-
-        
-    
+                        
