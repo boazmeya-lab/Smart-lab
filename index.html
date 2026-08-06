@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smartech Shop - E-commerce RDC</title>
+    <title>SmartShop RDC - E-commerce & Marketplace</title>
     <link rel="stylesheet" href="style.css">
     <!-- FontAwesome pour les icônes -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -12,15 +12,29 @@
 
     <!-- Header / Barre de recherche supérieure -->
     <header class="app-header">
-        <div class="logo-container">
-            <span class="logo-text">Smart<span>Shop</span></span>
-            <span class="badge-country">RDC 🇨🇩</span>
+        <div class="header-top">
+            <div class="logo-container">
+                <span class="logo-text">Smart<span>Shop</span></span>
+            </div>
+
+            <!-- Sélecteur de Ville (Filtrage par ville) -->
+            <div class="city-selector-container">
+                <i class="fa-solid fa-location-dot city-icon"></i>
+                <select id="city-select" class="city-select">
+                    <option value="kinshasa">📍 Kinshasa</option>
+                    <option value="lubumbashi">📍 Lubumbashi</option>
+                    <option value="goma">📍 Goma</option>
+                    <option value="bukavu">📍 Bukavu</option>
+                    <option value="kisangani">📍 Kisangani</option>
+                    <option value="all">🌐 Toute la RDC</option>
+                </select>
+            </div>
         </div>
 
         <!-- Barre de recherche avec option Photo -->
         <div class="search-box">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" placeholder="Rechercher un téléphone, marque...">
+            <input type="text" placeholder="Téléphone, marque, boutique...">
             <label for="image-upload" class="camera-btn" title="Recherche par photo">
                 <i class="fa-solid fa-camera"></i>
                 <input type="file" id="image-upload" accept="image/*" capture="environment" hidden>
@@ -35,7 +49,7 @@
         <section class="trust-banner">
             <div class="trust-item">
                 <i class="fa-solid fa-shield-halved"></i>
-                <span>Paiement sous séquestre (Escrow)</span>
+                <span>Paiement sous séquestre</span>
             </div>
             <div class="trust-item">
                 <i class="fa-solid fa-mobile-retro"></i>
@@ -51,9 +65,11 @@
             <button class="chip">Accessoires</button>
         </section>
 
-        <!-- Feed des Produits -->
+        <!-- Feed des Produits filtrés par ville -->
         <section class="products-section">
-            <h2 class="section-title">Téléphones Vérifiés</h2>
+            <div class="section-header">
+                <h2 class="section-title">Annonces à <span id="current-city-name">Kinshasa</span></h2>
+            </div>
 
             <div class="products-grid">
                 
@@ -62,18 +78,34 @@
                     <div class="product-image-container">
                         <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80" alt="iPhone 12 Pro">
                         <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Vendeur Vérifié</span>
+                        <span class="badge-location"><i class="fa-solid fa-location-dot"></i> Kinshasa (Gombe)</span>
                     </div>
+                    
                     <div class="product-info">
                         <h3 class="product-title">iPhone 12 Pro 128Go</h3>
-                        <p class="product-seller">Boutique Kintambo Tech</p>
+                        
+                        <!-- Profil Vendeur & Notes -->
+                        <div class="seller-block">
+                            <span class="product-seller"><i class="fa-solid fa-store"></i> Kintambo Tech</span>
+                            <div class="seller-rating">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.8</span>
+                                <span class="reviews-count">(24 avis)</span>
+                            </div>
+                        </div>
+
                         <div class="product-price">
                             <span class="price-usd">$380</span>
                             <span class="price-cdf">~ 1.064.000 CDF</span>
                         </div>
-                        <div class="product-tags">
-                            <span class="tag-payment">M-Pesa / Orange</span>
+
+                        <!-- Actions : Chat + Commander -->
+                        <div class="card-actions">
+                            <a href="https://wa.me/243000000000?text=Bonjour,%20je%20suis%20intéressé%20par%20l'iPhone%2012%20Pro" target="_blank" class="btn-chat" title="Chatter sur WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i> Chat
+                            </a>
+                            <button class="btn-buy"><i class="fa-solid fa-bag-shopping"></i> Commander</button>
                         </div>
-                        <button class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> Commander</button>
                     </div>
                 </article>
 
@@ -82,21 +114,95 @@
                     <div class="product-image-container">
                         <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80" alt="Samsung Galaxy S21">
                         <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Vendeur Vérifié</span>
+                        <span class="badge-location"><i class="fa-solid fa-location-dot"></i> Kinshasa (Victoire)</span>
                     </div>
+
                     <div class="product-info">
                         <h3 class="product-title">Samsung Galaxy S21 Ultra</h3>
-                        <p class="product-seller">Gombe Mobile Express</p>
+                        
+                        <!-- Profil Vendeur & Notes -->
+                        <div class="seller-block">
+                            <span class="product-seller"><i class="fa-solid fa-store"></i> Victoire Express</span>
+                            <div class="seller-rating">
+                                <i class="fa-solid fa-star"></i>
+                                <span>4.6</span>
+                                <span class="reviews-count">(12 avis)</span>
+                            </div>
+                        </div>
+
                         <div class="product-price">
                             <span class="price-usd">$420</span>
                             <span class="price-cdf">~ 1.176.000 CDF</span>
                         </div>
-                        <div class="product-tags">
-                            <span class="tag-payment">Airtel / Cash</span>
+
+                        <!-- Actions : Chat + Commander -->
+                        <div class="card-actions">
+                            <a href="https://wa.me/243000000000" target="_blank" class="btn-chat" title="Chatter sur WhatsApp">
+                                <i class="fa-brands fa-whatsapp"></i> Chat
+                            </a>
+                            <button class="btn-buy"><i class="fa-solid fa-bag-shopping"></i> Commander</button>
                         </div>
-                        <button class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> Commander</button>
                     </div>
                 </article>
 
+            </div>
+        </section>
+
+        <!-- Aperçu Profil Vendeur & Historique (Accessible via l'espace Compte) -->
+        <section class="seller-profile-preview">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar"><i class="fa-solid fa-user-tie"></i></div>
+                    <div class="profile-details">
+                        <h3>Kintambo Tech Store</h3>
+                        <p><i class="fa-solid fa-location-dot"></i> Kinshasa, Av. Kasa-Vubu</p>
+                        <div class="rating-stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star-half-stroke"></i>
+                            <span>4.8 / 5</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Historique des Ventes du Vendeur -->
+                <div class="sales-stats">
+                    <div class="stat-box">
+                        <span class="stat-number">142</span>
+                        <span class="stat-label">Ventes réussies</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">99%</span>
+                        <span class="stat-label">Taux de satisfaction</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-number">24</span>
+                        <span class="stat-label">Avis clients</span>
+                    </div>
+                </div>
+
+                <!-- Section Commentaires / Avis -->
+                <div class="reviews-section">
+                    <h4>Derniers avis clients</h4>
+                    
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-name">Christian M.</span>
+                            <span class="review-stars"><i class="fa-solid fa-star"></i> 5/5</span>
+                        </div>
+                        <p class="review-text">"Téléphone conforme, IMEI vérifié devant le livreur à Gombe. Service rapide !"</p>
+                    </div>
+
+                    <div class="review-item">
+                        <div class="review-header">
+                            <span class="reviewer-name">Grâce K.</span>
+                            <span class="review-stars"><i class="fa-solid fa-star"></i> 5/5</span>
+                        </div>
+                        <p class="review-text">"Paiement M-Pesa sécurisé, j'ai bien reçu la facture numérique."</p>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -113,8 +219,8 @@
             <span>Boutiques</span>
         </a>
         <a href="#" class="nav-item">
-            <i class="fa-solid fa-layer-group"></i>
-            <span>Catégories</span>
+            <i class="fa-solid fa-chart-line"></i>
+            <span>Mes Ventes</span>
         </a>
         <a href="#" class="nav-item">
             <i class="fa-solid fa-user"></i>
@@ -122,14 +228,17 @@
         </a>
     </nav>
 
-    <!-- Script JavaScript léger pour tester la sélection d'image -->
+    <!-- Script pour dynamiser la ville -->
     <script>
-        document.getElementById('image-upload').addEventListener('change', function(e) {
-            if (e.target.files && e.target.files[0]) {
-                const file = e.target.files[0];
-                alert("Image sélectionnée : " + file.name + "\nPrête pour la recherche vectorielle !");
-            }
+        // Met à jour le titre selon la ville sélectionnée
+        const citySelect = document.getElementById('city-select');
+        const cityNameSpan = document.getElementById('current-city-name');
+
+        citySelect.addEventListener('change', function() {
+            const selectedText = citySelect.options[citySelect.selectedIndex].text.replace('📍 ', '');
+            cityNameSpan.textContent = selectedText;
         });
     </script>
 </body>
-</html>
+    </html>
+                        
