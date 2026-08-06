@@ -1,252 +1,135 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Générateur de QR Code Pro</title>
-  
-  <!-- CDN QR Code Styling -->
-  <script type="text/javascript" src="https://unpkg.com/qr-code-styling@1.5.0/lib/qr-code-styling.js"></script>
-
-  <style>
-    * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
-    body { background-color: #f4f6f9; margin: 0; padding: 20px; display: flex; justify-content: center; }
-    
-    .app-container {
-      max-width: 900px;
-      width: 100%;
-      background: white;
-      padding: 25px;
-      border-radius: 16px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-    }
-
-    h2, h3 { text-align: center; color: #333; margin-top: 0; }
-
-    /* Section Lien */
-    .input-group { margin-bottom: 25px; }
-    .input-group label { display: block; font-weight: bold; margin-bottom: 8px; color: #555; }
-    .input-group input {
-      width: 100%;
-      padding: 12px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 16px;
-      outline: none;
-      transition: 0.3s;
-    }
-    .input-group input:focus { border-color: #007bff; }
-
-    /* Section Personnalisation Sur-Mesure */
-    .custom-panel {
-      background: #f8f9fa;
-      border: 1px solid #e9ecef;
-      border-radius: 12px;
-      padding: 15px;
-      margin-bottom: 25px;
-    }
-    .custom-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 15px;
-      margin-top: 10px;
-    }
-    .custom-field { display: flex; flex-direction: column; gap: 5px; font-size: 14px; font-weight: 600; color: #666; }
-    .custom-field input, .custom-field select { padding: 8px; border-radius: 6px; border: 1px solid #ccc; }
-
-    /* Grille des 12 Modèles */
-    .templates-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-    .template-card {
-      border: 2px solid #eee;
-      border-radius: 10px;
-      padding: 12px 8px;
-      text-align: center;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      background: #fff;
-      transition: 0.2s;
-    }
-    .template-card:hover { border-color: #007bff; background: #f0f7ff; }
-    .template-card.active { border-color: #007bff; background: #007bff; color: white; }
-
-    /* Zone d'affichage du QR Code */
-    .preview-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 15px;
-      padding-top: 10px;
-      border-top: 2px dashed #eee;
-    }
-    #canvas { margin: 10px 0; }
-    
-    .download-btn {
-      background: #111;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .download-btn:hover { background: #333; }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smartech Shop - E-commerce RDC</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome pour les icônes -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
 
-  <div class="app-container">
-    <h2>Générateur de QR Code</h2>
-
-    <!-- 1. Saisie de l'URL -->
-    <div class="input-group">
-      <label for="qr-input">Lien ou contenu du QR Code :</label>
-      <input type="text" id="qr-input" value="https://google.com" placeholder="https://ton-lien.com">
-    </div>
-
-    <!-- 2. Personnalisation Manuel Sur-Mesure -->
-    <div class="custom-panel">
-      <h3>🎨 Mode Sur-Mesure (Personnaliser soi-même)</h3>
-      <div class="custom-grid">
-        <div class="custom-field">
-          <label>Couleur des points :</label>
-          <input type="color" id="custom-color" value="#000000" onchange="applyCustomStyle()">
+    <!-- Header / Barre de recherche supérieure -->
+    <header class="app-header">
+        <div class="logo-container">
+            <span class="logo-text">Smart<span>Shop</span></span>
+            <span class="badge-country">RDC 🇨🇩</span>
         </div>
-        <div class="custom-field">
-          <label>Forme des points :</label>
-          <select id="custom-shape" onchange="applyCustomStyle()">
-            <option value="square">Carré classique</option>
-            <option value="dots">Points / Cercles</option>
-            <option value="rounded" selected>Arrondi</option>
-            <option value="classy">Classique chic</option>
-            <option value="classy-rounded">Fluid / Extra arrondi</option>
-          </select>
+
+        <!-- Barre de recherche avec option Photo -->
+        <div class="search-box">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" placeholder="Rechercher un téléphone, marque...">
+            <label for="image-upload" class="camera-btn" title="Recherche par photo">
+                <i class="fa-solid fa-camera"></i>
+                <input type="file" id="image-upload" accept="image/*" capture="environment" hidden>
+            </label>
         </div>
-        <div class="custom-field">
-          <label>Ajouter un logo (PNG/SVG) :</label>
-          <input type="file" id="custom-logo" accept="image/*" onchange="handleLogoUpload(event)">
-        </div>
-      </div>
-    </div>
+    </header>
 
-    <!-- 3. Galerie de 12 Modèles Prédéfinis -->
-    <h3>⚡ Ou choisis un modèle rapide (12 Modèles)</h3>
-    <div class="templates-grid" id="templates-container"></div>
+    <!-- Main Content -->
+    <main class="container">
+        
+        <!-- Bannières d'assurance / Confiance -->
+        <section class="trust-banner">
+            <div class="trust-item">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Paiement sous séquestre (Escrow)</span>
+            </div>
+            <div class="trust-item">
+                <i class="fa-solid fa-mobile-retro"></i>
+                <span>Test IMEI à la livraison</span>
+            </div>
+        </section>
 
-    <!-- 4. Rendu & Téléchargement -->
-    <div class="preview-section">
-      <div id="canvas"></div>
-      <button class="download-btn" onclick="downloadQR()">Télécharger le PNG</button>
-    </div>
-  </div>
+        <!-- Filtres Rapides / Catégories -->
+        <section class="categories">
+            <button class="chip active">Tous</button>
+            <button class="chip"><i class="fa-solid fa-mobile-screen"></i> iPhones</button>
+            <button class="chip"><i class="fa-brands fa-android"></i> Samsung</button>
+            <button class="chip">Accessoires</button>
+        </section>
 
-  <script>
-    // 12 MODÈLES PRÉ-CONFIGURÉS
-    const templates = [
-      { id: 'youtube', name: 'YouTube', color: '#FF0000', shape: 'rounded', logo: 'https://upload.wikimedia.org/wikipedia/commons/ef/ef0/YouTube_logo_%282017%29.svg' },
-      { id: 'whatsapp', name: 'WhatsApp', color: '#25D366', shape: 'dots', logo: 'https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg' },
-      { id: 'instagram', name: 'Instagram', color: '#E1306C', shape: 'rounded', logo: 'https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png' },
-      { id: 'facebook', name: 'Facebook', color: '#1877F2', shape: 'square', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b8/2021_Facebook_icon.svg' },
-      { id: 'telegram', name: 'Telegram', color: '#0088cc', shape: 'dots', logo: 'https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg' },
-      { id: 'tiktok', name: 'TikTok', color: '#000000', shape: 'classy-rounded', logo: 'https://cdn-icons-png.flaticon.com/512/3046/3046124.png' },
-      { id: 'linkedin', name: 'LinkedIn', color: '#0A66C2', shape: 'square', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/ca/LinkedIn_logo_initials.png' },
-      { id: 'spotify', name: 'Spotify', color: '#1DB954', shape: 'dots', logo: 'https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg' },
-      { id: 'wifi', name: 'Wi-Fi Pro', color: '#0055ff', shape: 'classy-rounded', logo: 'https://cdn-icons-png.flaticon.com/512/93/93158.png' },
-      { id: 'vcard', name: 'Contact / vCard', color: '#333333', shape: 'rounded', logo: 'https://cdn-icons-png.flaticon.com/512/1250/1250689.png' },
-      { id: 'paypal', name: 'PayPal / Paiement', color: '#003087', shape: 'square', logo: 'https://cdn-icons-png.flaticon.com/512/174/174861.png' },
-      { id: 'gold', name: 'Luxe / Gold', color: '#D4AF37', shape: 'classy', logo: '' }
-    ];
+        <!-- Feed des Produits -->
+        <section class="products-section">
+            <h2 class="section-title">Téléphones Vérifiés</h2>
 
-    let activeConfig = {
-      color: templates[0].color,
-      shape: templates[0].shape,
-      logo: templates[0].logo
-    };
+            <div class="products-grid">
+                
+                <!-- Carte Produit 1 -->
+                <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=500&q=80" alt="iPhone 12 Pro">
+                        <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Vendeur Vérifié</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">iPhone 12 Pro 128Go</h3>
+                        <p class="product-seller">Boutique Kintambo Tech</p>
+                        <div class="product-price">
+                            <span class="price-usd">$380</span>
+                            <span class="price-cdf">~ 1.064.000 CDF</span>
+                        </div>
+                        <div class="product-tags">
+                            <span class="tag-payment">M-Pesa / Orange</span>
+                        </div>
+                        <button class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> Commander</button>
+                    </div>
+                </article>
 
-    // Initialisation de la librairie QR
-    const qrCode = new QRCodeStyling({
-      width: 260,
-      height: 260,
-      data: document.getElementById("qr-input").value,
-      imageOptions: { margin: 6, hideBackgroundDots: true },
-      qrOptions: { errorCorrectionLevel: 'H' }
-    });
+                <!-- Carte Produit 2 -->
+                <article class="product-card">
+                    <div class="product-image-container">
+                        <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=500&q=80" alt="Samsung Galaxy S21">
+                        <span class="badge-verified"><i class="fa-solid fa-circle-check"></i> Vendeur Vérifié</span>
+                    </div>
+                    <div class="product-info">
+                        <h3 class="product-title">Samsung Galaxy S21 Ultra</h3>
+                        <p class="product-seller">Gombe Mobile Express</p>
+                        <div class="product-price">
+                            <span class="price-usd">$420</span>
+                            <span class="price-cdf">~ 1.176.000 CDF</span>
+                        </div>
+                        <div class="product-tags">
+                            <span class="tag-payment">Airtel / Cash</span>
+                        </div>
+                        <button class="btn-buy"><i class="fa-solid fa-cart-shopping"></i> Commander</button>
+                    </div>
+                </article>
 
-    qrCode.append(document.getElementById("canvas"));
+            </div>
+        </section>
 
-    // Affichage des cartes des 12 modèles dans l'interface
-    const container = document.getElementById('templates-container');
-    templates.forEach((tpl, index) => {
-      const card = document.createElement('div');
-      card.className = `template-card ${index === 0 ? 'active' : ''}`;
-      card.innerText = tpl.name;
-      card.onclick = () => selectTemplate(tpl, card);
-      container.appendChild(card);
-    });
+    </main>
 
-    // Sélectionner un modèle rapide
-    function selectTemplate(tpl, cardElement) {
-      document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
-      cardElement.classList.add('active');
+    <!-- Navigation du Bas (Mobile Bottom Bar) -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active">
+            <i class="fa-solid fa-house"></i>
+            <span>Accueil</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-store"></i>
+            <span>Boutiques</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-layer-group"></i>
+            <span>Catégories</span>
+        </a>
+        <a href="#" class="nav-item">
+            <i class="fa-solid fa-user"></i>
+            <span>Compte</span>
+        </a>
+    </nav>
 
-      // Mettre à jour les champs personnalisés
-      document.getElementById('custom-color').value = tpl.color;
-      document.getElementById('custom-shape').value = tpl.shape;
-
-      activeConfig = { color: tpl.color, shape: tpl.shape, logo: tpl.logo };
-      renderQR();
-    }
-
-    // Appliquer le style fait sur-mesure par l'utilisateur
-    function applyCustomStyle() {
-      document.querySelectorAll('.template-card').forEach(c => c.classList.remove('active'));
-
-      activeConfig.color = document.getElementById('custom-color').value;
-      activeConfig.shape = document.getElementById('custom-shape').value;
-      renderQR();
-    }
-
-    // Gérer l'upload d'un logo personnalisé
-    function handleLogoUpload(event) {
-      const file = event.target.files[0];
-      if (file) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          activeConfig.logo = e.target.result;
-          renderQR();
-        };
-        reader.readAsDataURL(file);
-      }
-    }
-
-    // Rendu du QR code selon la config actuelle
-    function renderQR() {
-      qrCode.update({
-        data: document.getElementById("qr-input").value,
-        image: activeConfig.logo,
-        dotsOptions: { color: activeConfig.color, type: activeConfig.shape },
-        cornersSquareOptions: { color: activeConfig.color, type: "extra-rounded" },
-        cornersDotOptions: { color: activeConfig.color, type: "dot" }
-      });
-    }
-
-    // Mettre à jour au changement de texte
-    document.getElementById("qr-input").addEventListener("input", () => renderQR());
-
-    // Télécharger l'image
-    function downloadQR() {
-      qrCode.download({ name: "mon-qr-code", extension: "png" });
-    }
-
-    // Rendu initial
-    renderQR();
-  </script>
+    <!-- Script JavaScript léger pour tester la sélection d'image -->
+    <script>
+        document.getElementById('image-upload').addEventListener('change', function(e) {
+            if (e.target.files && e.target.files[0]) {
+                const file = e.target.files[0];
+                alert("Image sélectionnée : " + file.name + "\nPrête pour la recherche vectorielle !");
+            }
+        });
+    </script>
 </body>
 </html>
