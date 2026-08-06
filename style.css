@@ -424,3 +424,43 @@ body {
     border-radius: 50%; 
     margin-top: -12px; 
 }
+/* Bouton d'upload de photo */
+.file-upload-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px;
+    background: #f1f5f9;
+    border: 2px dashed #cbd5e1;
+    border-radius: 8px;
+    color: #475569;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.photo-preview {
+    width: 100%;
+    height: 180px;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.photo-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.empty-msg {
+    font-size: 0.85rem;
+    color: #64748b;
+    padding: 20px 0;
+}
+
+.btn-danger {
+    background: #fef2f2 !important;
+    color: #ef4444 !important;
+    border-color: #fecaca !important;
+    }
