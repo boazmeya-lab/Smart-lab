@@ -1,58 +1,426 @@
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
-body { background-color: #f4f6f7; color: #1a202c; padding-bottom: 75px; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; 
+}
+
+body { 
+    background-color: #f4f6f7; 
+    color: #1a202c; 
+    padding-bottom: 75px; 
+}
+
+/* REGLES MASQUAGE DES SECTIONS (FIXE L'ERREUR D'AFFICHAGE) */
+.app-section.hidden {
+    display: none !important;
+}
+
+.app-section.active {
+    display: block !important;
+}
 
 /* Header */
-.app-header { background: #ffffff; padding: 12px 16px; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 100; }
-.header-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
-.menu-btn { font-size: 1.3rem; color: #0f172a; }
-.logo-text { font-size: 1.4rem; font-weight: 900; color: #ff6e14; /* Orange Leboncoin */ }
-.logo-text span { color: #002f49; }
+.app-header { 
+    background: #ffffff; 
+    padding: 12px 16px; 
+    border-bottom: 1px solid #e2e8f0; 
+    position: sticky; 
+    top: 0; 
+    z-index: 100; 
+}
 
-.city-selector { display: flex; align-items: center; gap: 4px; font-size: 0.85rem; color: #64748b; }
-.city-selector select { border: none; font-weight: 600; color: #0f172a; outline: none; background: transparent; }
+.header-top { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    margin-bottom: 10px; 
+}
 
-.search-box { display: flex; align-items: center; background: #f1f5f9; border-radius: 20px; padding: 8px 14px; }
-.search-icon { color: #64748b; margin-right: 8px; }
-.search-box input { border: none; background: transparent; width: 100%; outline: none; font-size: 0.9rem; }
-.camera-btn { color: #ff6e14; cursor: pointer; font-size: 1.1rem; }
+.menu-btn { 
+    font-size: 1.3rem; 
+    color: #0f172a; 
+}
+
+.logo-text { 
+    font-size: 1.4rem; 
+    font-weight: 900; 
+    color: #ff6e14; 
+}
+
+.logo-text span { 
+    color: #002f49; 
+}
+
+.city-selector { 
+    display: flex; 
+    align-items: center; 
+    gap: 4px; 
+    font-size: 0.85rem; 
+    color: #64748b; 
+}
+
+.city-selector select { 
+    border: none; 
+    font-weight: 600; 
+    color: #0f172a; 
+    outline: none; 
+    background: transparent; 
+}
+
+.search-box { 
+    display: flex; 
+    align-items: center; 
+    background: #f1f5f9; 
+    border-radius: 20px; 
+    padding: 8px 14px; 
+}
+
+.search-icon { 
+    color: #64748b; 
+    margin-right: 8px; 
+}
+
+.search-box input { 
+    border: none; 
+    background: transparent; 
+    width: 100%; 
+    outline: none; 
+    font-size: 0.9rem; 
+}
+
+.camera-btn { 
+    color: #ff6e14; 
+    cursor: pointer; 
+    font-size: 1.1rem; 
+}
 
 /* Container & Sections */
-.container { padding: 16px 0; }
-.section-block { margin-bottom: 24px; padding-left: 16px; }
-.block-header { display: flex; justify-content: space-between; align-items: center; padding-right: 16px; margin-bottom: 12px; }
-.block-title { font-size: 1.1rem; font-weight: 700; color: #0f172a; }
+.container { 
+    padding: 16px 0; 
+}
+
+.section-block { 
+    margin-bottom: 24px; 
+    padding-left: 16px; 
+    padding-right: 16px; 
+}
+
+.block-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 12px; 
+}
+
+.block-title { 
+    font-size: 1.1rem; 
+    font-weight: 700; 
+    color: #0f172a; 
+}
 
 /* Horizontal Scroll */
-.horizontal-scroll { display: flex; gap: 12px; overflow-x: auto; padding-right: 16px; scrollbar-width: none; }
-.horizontal-scroll::-webkit-scrollbar { display: none; }
+.horizontal-scroll { 
+    display: flex; 
+    gap: 12px; 
+    overflow-x: auto; 
+    scrollbar-width: none; 
+}
+
+.horizontal-scroll::-webkit-scrollbar { 
+    display: none; 
+}
 
 /* Card Trend */
-.trend-card { min-width: 130px; height: 160px; border-radius: 12px; background-size: cover; background-position: center; position: relative; display: flex; align-items: flex-end; padding: 10px; overflow: hidden; }
-.trend-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(transparent, rgba(0,0,0,0.8)); }
-.trend-card span { position: relative; z-index: 1; color: white; font-weight: 700; font-size: 0.85rem; }
+.trend-card { 
+    min-width: 130px; 
+    height: 160px; 
+    border-radius: 12px; 
+    background-size: cover; 
+    background-position: center; 
+    position: relative; 
+    display: flex; 
+    align-items: flex-end; 
+    padding: 10px; 
+    overflow: hidden; 
+}
+
+.trend-card::after { 
+    content: ''; 
+    position: absolute; 
+    inset: 0; 
+    background: linear-gradient(transparent, rgba(0,0,0,0.8)); 
+}
+
+.trend-card span { 
+    position: relative; 
+    z-index: 1; 
+    color: white; 
+    font-weight: 700; 
+    font-size: 0.85rem; 
+}
 
 /* Leboncoin Product Card */
-.lbc-card { min-width: 220px; max-width: 220px; background: transparent; display: flex; flex-direction: column; }
-.seller-header { display: flex; align-items: center; gap: 6px; margin-bottom: 6px; font-size: 0.75rem; }
-.seller-avatar { width: 22px; height: 22px; background: #10b981; color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.7rem; }
-.seller-avatar.orange { background: #f97316; }
-.seller-name { font-weight: 600; color: #0f172a; }
-.seller-score { color: #f59e0b; font-weight: 700; margin-left: auto; }
-.seller-score .count { color: #64748b; font-weight: 400; }
+.lbc-card { 
+    min-width: 220px; 
+    max-width: 220px; 
+    background: transparent; 
+    display: flex; 
+    flex-direction: column; 
+}
 
-.card-image { position: relative; width: 100%; height: 220px; border-radius: 16px; overflow: hidden; margin-bottom: 8px; }
-.card-image img { width: 100%; height: 100%; object-fit: cover; }
-.like-btn { position: absolute; top: 10px; right: 10px; width: 32px; height: 32px; border-radius: 50%; background: rgba(255,255,255,0.9); border: none; display: flex; align-items: center; justify-content: center; font-size: 1rem; cursor: pointer; }
+.seller-header { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    margin-bottom: 6px; 
+    font-size: 0.75rem; 
+}
 
-.card-details { display: flex; flex-direction: column; gap: 3px; }
-.card-title { font-size: 0.9rem; font-weight: 600; color: #1e293b; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.card-price { font-size: 1.05rem; font-weight: 800; color: #0f172a; }
-.card-delivery { font-size: 0.7rem; color: #475569; }
-.card-meta { font-size: 0.7rem; color: #94a3b8; margin-top: 2px; }
+.seller-avatar { 
+    width: 22px; 
+    height: 22px; 
+    background: #10b981; 
+    color: white; 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-weight: 700; 
+    font-size: 0.7rem; 
+}
+
+.seller-avatar.orange { 
+    background: #f97316; 
+}
+
+.seller-name { 
+    font-weight: 600; 
+    color: #0f172a; 
+}
+
+.seller-score { 
+    color: #f59e0b; 
+    font-weight: 700; 
+    margin-left: auto; 
+}
+
+.seller-score .count { 
+    color: #64748b; 
+    font-weight: 400; 
+}
+
+.card-image { 
+    position: relative; 
+    width: 100%; 
+    height: 220px; 
+    border-radius: 16px; 
+    overflow: hidden; 
+    margin-bottom: 8px; 
+}
+
+.card-image img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+}
+
+.like-btn { 
+    position: absolute; 
+    top: 10px; 
+    right: 10px; 
+    width: 32px; 
+    height: 32px; 
+    border-radius: 50%; 
+    background: rgba(255,255,255,0.9); 
+    border: none; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-size: 1rem; 
+    cursor: pointer; 
+}
+
+.card-details { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 3px; 
+}
+
+.card-title { 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+    color: #1e293b; 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.card-price { 
+    font-size: 1.05rem; 
+    font-weight: 800; 
+    color: #0f172a; 
+}
+
+.card-delivery { 
+    font-size: 0.7rem; 
+    color: #475569; 
+}
+
+.card-meta { 
+    font-size: 0.7rem; 
+    color: #94a3b8; 
+    margin-top: 2px; 
+}
+
+/* Styles Formulaire et Compte */
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.form-container input, 
+.form-container select, 
+.form-container textarea {
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    width: 100%;
+}
+
+.btn-submit {
+    background-color: #ff6e14;
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.account-card {
+    background: white;
+    padding: 16px;
+    border-radius: 12px;
+    margin-top: 12px;
+    border: 1px solid #e2e8f0;
+}
+
+.account-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.account-avatar {
+    width: 48px;
+    height: 48px;
+    background: #f1f5f9;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    color: #64748b;
+}
+
+.account-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.account-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    text-align: left;
+    font-size: 0.85rem;
+    cursor: pointer;
+    width: 100%;
+}
+
+.chat-list {
+    margin-top: 12px;
+}
+
+.chat-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+}
+
+.chat-avatar {
+    width: 36px;
+    height: 36px;
+    background: #10b981;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+}
+
+.chat-info h4 {
+    font-size: 0.85rem;
+    color: #0f172a;
+}
+
+.chat-info p {
+    font-size: 0.75rem;
+    color: #64748b;
+}
 
 /* Bottom Nav */
-.bottom-nav { position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; display: flex; justify-content: space-around; padding: 8px 0; border-top: 1px solid #e2e8f0; z-index: 100; }
-.nav-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: #64748b; font-size: 0.65rem; gap: 2px; }
-.nav-item i { font-size: 1.2rem; }
-.nav-item.active { color: #ff6e14; }
-.nav-item.add-btn i { background: #ff6e14; color: white; padding: 8px; border-radius: 50%; margin-top: -12px; }
+.bottom-nav { 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    background: #ffffff; 
+    display: flex; 
+    justify-content: space-around; 
+    padding: 8px 0; 
+    border-top: 1px solid #e2e8f0; 
+    z-index: 100; 
+}
+
+.nav-item { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-decoration: none; 
+    color: #64748b; 
+    font-size: 0.65rem; 
+    gap: 2px; 
+}
+
+.nav-item i { 
+    font-size: 1.2rem; 
+}
+
+.nav-item.active { 
+    color: #ff6e14; 
+}
+
+.nav-item.add-btn i { 
+    background: #ff6e14; 
+    color: white; 
+    padding: 8px; 
+    border-radius: 50%; 
+    margin-top: -12px; 
+}
