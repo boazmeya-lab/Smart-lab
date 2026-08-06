@@ -287,3 +287,208 @@ body {
     color: #2563eb;
   }
       
+/* Modification du Header pour intégrer le sélecteur de ville */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.city-selector-container {
+    display: flex;
+    align-items: center;
+    background-color: #f1f5f9;
+    border-radius: 20px;
+    padding: 4px 10px;
+    border: 1px solid #cbd5e1;
+}
+
+.city-icon {
+    color: #ef4444;
+    font-size: 0.8rem;
+    margin-right: 4px;
+}
+
+.city-select {
+    border: none;
+    background: transparent;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #0f172a;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Badge Localisation sur l'image du produit */
+.badge-location {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(15, 23, 42, 0.85);
+    color: #ffffff;
+    font-size: 0.65rem;
+    padding: 3px 6px;
+    border-radius: 6px;
+    backdrop-filter: blur(4px);
+}
+
+/* Bloc Vendeur & Avis sur la carte */
+.seller-block {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 6px;
+}
+
+.seller-rating {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    font-size: 0.7rem;
+    color: #f59e0b;
+    font-weight: 700;
+}
+
+.reviews-count {
+    color: #64748b;
+    font-weight: 400;
+    font-size: 0.65rem;
+}
+
+/* Boutons d'actions de la carte produit (Chat WhatsApp + Commander) */
+.card-actions {
+    display: flex;
+    gap: 6px;
+    margin-top: auto;
+}
+
+.btn-chat {
+    background-color: #25d366; /* Couleur WhatsApp */
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex: 1;
+}
+
+.btn-buy {
+    flex: 2;
+}
+
+/* Section Profil Vendeur & Historique des ventes */
+.seller-profile-preview {
+    margin-top: 24px;
+}
+
+.profile-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid #e2e8f0;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.avatar {
+    width: 48px;
+    height: 48px;
+    background-color: #eff6ff;
+    color: #2563eb;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.profile-details h3 {
+    font-size: 0.95rem;
+    color: #0f172a;
+}
+
+.profile-details p {
+    font-size: 0.75rem;
+    color: #64748b;
+}
+
+.rating-stars {
+    color: #f59e0b;
+    font-size: 0.75rem;
+    margin-top: 2px;
+}
+
+.rating-stars span {
+    color: #0f172a;
+    font-weight: 600;
+    margin-left: 4px;
+}
+
+/* Stats Historique des Ventes */
+.sales-stats {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8fafc;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.stat-box {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #2563eb;
+}
+
+.stat-label {
+    font-size: 0.65rem;
+    color: #64748b;
+}
+
+/* Commentaires / Avis clients */
+.reviews-section h4 {
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+    color: #0f172a;
+}
+
+.review-item {
+    background-color: #f1f5f9;
+    padding: 8px 10px;
+    border-radius: 8px;
+    margin-bottom: 6px;
+}
+
+.review-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 2px;
+}
+
+.review-stars {
+    color: #f59e0b;
+}
+
+.review-text {
+    font-size: 0.75rem;
+    color: #334155;
+    font-style: italic;
+}
