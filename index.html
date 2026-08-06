@@ -27,14 +27,10 @@
             </div>
         </div>
 
-        <!-- Barre de recherche avec caméra -->
+        <!-- Barre de recherche -->
         <div class="search-box">
             <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input type="text" id="search-input" placeholder="Rechercher sur smartshop">
-            <label for="image-upload" class="camera-btn" title="Recherche par photo">
-                <i class="fa-solid fa-camera"></i>
-                <input type="file" id="image-upload" accept="image/*" capture="environment" hidden>
-            </label>
+            <input type="text" id="search-input" placeholder="Rechercher sur smartshop...">
         </div>
     </header>
 
@@ -47,10 +43,10 @@
                 <h2 class="block-title">Tendance en ce moment</h2>
                 <div class="horizontal-scroll">
                     <div class="trend-card" style="background-image: url('https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=300');">
-                        <span>iPhones Vérifiés</span>
+                        <span>iPhones</span>
                     </div>
                     <div class="trend-card" style="background-image: url('https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=300');">
-                        <span>Samsung Galaxy</span>
+                        <span>Samsung</span>
                     </div>
                     <div class="trend-card" style="background-image: url('https://images.unsplash.com/photo-1546868871-7041f2a55e12?w=300');">
                         <span>Montres Smart</span>
@@ -58,51 +54,15 @@
                 </div>
             </div>
 
-            <!-- Annonces -->
+            <!-- Feed des Annonces Réelles -->
             <div class="section-block">
                 <div class="block-header">
                     <h2 class="block-title">Annonces à <span id="display-city">Toute la RDC</span></h2>
-                    <i class="fa-solid fa-chevron-right"></i>
                 </div>
 
-                <div class="horizontal-scroll products-scroll">
-                    
-                    <article class="lbc-card" data-city="Kinshasa">
-                        <div class="seller-header">
-                            <div class="seller-avatar">S</div>
-                            <span class="seller-name">Sébastien</span>
-                            <span class="seller-score"><i class="fa-solid fa-star"></i> 5 <span class="count">(99)</span></span>
-                        </div>
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=400" alt="iPhone 12">
-                            <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
-                        </div>
-                        <div class="card-details">
-                            <h3 class="card-title">iPhone 12 Pro 128Go</h3>
-                            <p class="card-price">380 $</p>
-                            <p class="card-delivery"><i class="fa-solid fa-truck"></i> Livraison possible</p>
-                            <p class="card-meta">Kinshasa (Gombe) • aujourd'hui à 01:08</p>
-                        </div>
-                    </article>
-
-                    <article class="lbc-card" data-city="Lubumbashi">
-                        <div class="seller-header">
-                            <div class="seller-avatar orange">A</div>
-                            <span class="seller-name">Anakin S.</span>
-                            <span class="seller-score"><i class="fa-solid fa-star"></i> 5 <span class="count">(12)</span></span>
-                        </div>
-                        <div class="card-image">
-                            <img src="https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?w=400" alt="Samsung S21">
-                            <button class="like-btn"><i class="fa-regular fa-heart"></i></button>
-                        </div>
-                        <div class="card-details">
-                            <h3 class="card-title">Samsung S21 Ultra 256Go</h3>
-                            <p class="card-price">420 $</p>
-                            <p class="card-delivery"><i class="fa-solid fa-truck"></i> Livraison possible</p>
-                            <p class="card-meta">Lubumbashi • aujourd'hui à 00:15</p>
-                        </div>
-                    </article>
-
+                <!-- C'est ici que les nouvelles annonces publiées s'afficheront -->
+                <div id="products-feed" class="horizontal-scroll products-scroll">
+                    <p id="no-products-msg" class="empty-msg">Aucune annonce publiée pour le moment. Soyez le premier à publier !</p>
                 </div>
             </div>
         </section>
@@ -122,15 +82,23 @@
             <div class="section-block">
                 <h2 class="block-title">Déposer une annonce</h2>
                 <form id="form-annonce" class="form-container">
-                    <input type="text" placeholder="Titre de l'annonce" required>
-                    <input type="number" placeholder="Prix en USD ($)" required>
-                    <select required>
+                    <input type="text" id="annonce-title" placeholder="Titre de l'annonce (ex: iPhone 13 Pro)" required>
+                    <input type="number" id="annonce-price" placeholder="Prix en USD ($)" required>
+                    <select id="annonce-city" required>
                         <option value="">Sélectionner une ville</option>
                         <option value="Kinshasa">Kinshasa</option>
                         <option value="Lubumbashi">Lubumbashi</option>
                         <option value="Goma">Goma</option>
                     </select>
-                    <textarea placeholder="Description de l'article..."></textarea>
+                    
+                    <!-- Champ Photo du produit -->
+                    <label class="file-upload-label">
+                        <i class="fa-solid fa-camera"></i> Ajouter une photo du produit
+                        <input type="file" id="annonce-photo" accept="image/*" required hidden>
+                    </label>
+                    <div id="photo-preview" class="photo-preview hidden"></div>
+
+                    <textarea id="annonce-desc" placeholder="Description de l'article..."></textarea>
                     <button type="submit" class="btn-submit">Publier l'annonce</button>
                 </form>
             </div>
@@ -140,34 +108,36 @@
         <section id="section-messages" class="app-section hidden">
             <div class="section-block">
                 <h2 class="block-title">Messages & Chats</h2>
-                <div class="chat-list">
-                    <div class="chat-item">
-                        <div class="chat-avatar">S</div>
-                        <div class="chat-info">
-                            <h4>Sébastien (iPhone 12 Pro)</h4>
-                            <p>Bonjour, le téléphone est toujours disponible à Gombe ?</p>
-                        </div>
-                    </div>
-                </div>
+                <p class="empty-msg">Connectez-vous pour échanger avec les vendeurs.</p>
             </div>
         </section>
 
-        <!-- SECTION 5 : COMPTE -->
+        <!-- SECTION 5 : COMPTE (Création de compte & Connexion) -->
         <section id="section-compte" class="app-section hidden">
             <div class="section-block">
-                <h2 class="block-title">Mon Compte</h2>
-                <div class="account-card">
+                <!-- État Non Connecté : Formulaire d'inscription -->
+                <div id="auth-box" class="account-card">
+                    <h2 class="block-title">Créer un compte SmartShop</h2>
+                    <form id="form-register" class="form-container">
+                        <input type="text" id="reg-name" placeholder="Nom complet" required>
+                        <input type="tel" id="reg-phone" placeholder="Numéro de téléphone (+243...)" required>
+                        <input type="password" id="reg-pass" placeholder="Mot de passe" required>
+                        <button type="submit" class="btn-submit">S'inscrire</button>
+                    </form>
+                </div>
+
+                <!-- État Connecté (Masqué au départ) -->
+                <div id="user-profile-box" class="account-card hidden">
                     <div class="account-header">
                         <div class="account-avatar"><i class="fa-solid fa-user"></i></div>
                         <div>
-                            <h3>Utilisateur SmartShop</h3>
-                            <p>+243 81 000 0000</p>
+                            <h3 id="profile-name">Nom Utilisateur</h3>
+                            <p id="profile-phone">+243 00 000 0000</p>
                         </div>
                     </div>
                     <div class="account-menu">
-                        <button class="account-link"><i class="fa-solid fa-box"></i> Mes annonces en ligne</button>
-                        <button class="account-link"><i class="fa-solid fa-wallet"></i> Solde & Portefeuille Mobile Money</button>
-                        <button class="account-link"><i class="fa-solid fa-gear"></i> Paramètres du compte</button>
+                        <button class="account-link"><i class="fa-solid fa-box"></i> Mes annonces publiées</button>
+                        <button id="btn-logout" class="account-link btn-danger"><i class="fa-solid fa-right-from-bracket"></i> Se déconnecter</button>
                     </div>
                 </div>
             </div>
@@ -202,4 +172,4 @@
     <script src="script.js"></script>
 </body>
     </html>
-                        
+    
